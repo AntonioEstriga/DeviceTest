@@ -1,10 +1,15 @@
-import { ResultSetHeader, OkPacketParams, RowDataPacket } from "mysql2";
+import { ResultSetHeader } from "mysql2";
 import { db } from "../db"
 import { IDevice } from "./entity/IDevice"
 
-export class DeviceRepository {
+class DeviceRepository {
   async findAll(): Promise<IDevice[]> {
     const [result,_]= await db.execute<IDevice[]>("SELECT * FROM device");
+    return result;
+  }
+
+  async findByName(): Promise<IDevice[]> {
+    const [result, _] = await db.execute<IDevice[]>("SELECT * FROM device WHERE name = ?");
     return result;
   }
 
@@ -39,4 +44,4 @@ export class DeviceRepository {
       return result;
   }
 }
-//export const deviceRepository = new DeviceRepository();
+export const deviceRepository = new DeviceRepository();
