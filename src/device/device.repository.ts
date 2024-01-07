@@ -1,8 +1,8 @@
 import { ResultSetHeader } from "mysql2";
-import { db } from "../db"
-import { IDevice } from "./entity/IDevice"
-import { CreateDeviceDTO } from "./dto/CreateDeviceDTO";
-import { UpdateDeviceDTO } from "./dto/UpdateDeviceDTO";
+import { db } from "../db.ts"
+import { IDevice } from "./entity/IDevice.ts"
+import { CreateDeviceDTO } from "./dto/CreateDeviceDTO.ts";
+import { UpdateDeviceDTO } from "./dto/UpdateDeviceDTO.ts";
 
 class DeviceRepository {
   async findAll(): Promise<IDevice[]> {

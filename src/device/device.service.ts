@@ -1,6 +1,6 @@
-import { deviceRepository } from "./device.repository";
-import { CreateDeviceDTO } from "./dto/CreateDeviceDTO";
-import { UpdateDeviceDTO } from "./dto/UpdateDeviceDTO";
+import { deviceRepository } from "./device.repository.ts";
+import { CreateDeviceDTO } from "./dto/CreateDeviceDTO.ts";
+import { UpdateDeviceDTO } from "./dto/UpdateDeviceDTO.ts";
 
 class DeviceService {
   async create(createDeviceDTO:CreateDeviceDTO){

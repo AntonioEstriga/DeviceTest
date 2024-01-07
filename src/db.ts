@@ -1,5 +1,7 @@
 import { createConnection } from 'mysql2/promise';
+import * as dotevnv from "dotenv"
 
+dotevnv.config()
 const db = await createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,

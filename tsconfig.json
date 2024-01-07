@@ -82,6 +82,7 @@
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
 
     /* Type Checking */
+    "allowImportingTsExtensions": true, 
     "strict": true,
     "strictPropertyInitialization": false,
         "emitDecoratorMetadata": true,

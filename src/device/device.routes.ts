@@ -1,9 +1,9 @@
 import express from "express";
-import { createDevice, deleteDevice, getAllDevices, getDeviceByBrand, getDeviceById, updateDevice } from "./device.controller";
+import { createDevice, deleteDevice, getAllDevices, getDeviceByBrand, getDeviceById, updateDevice } from "./device.controller.ts";
 
 export const router = express.Router()
 
-router.post('/create',createDevice)//inserir midleware validator
+router.post('/create',createDevice)
 
 router.get('/:deviceId',getDeviceById)
 

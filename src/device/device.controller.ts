@@ -1,8 +1,8 @@
 import { validate, validateOrReject } from "class-validator";
-import { CreateDeviceDTO } from "./dto/CreateDeviceDTO";
-import { deviceService } from "./device.service"
+import { CreateDeviceDTO } from "./dto/CreateDeviceDTO.ts";
+import { deviceService } from "./device.service.ts"
 import { Request, Response } from 'express'
-import { UpdateDeviceDTO } from "./dto/UpdateDeviceDTO";
+import { UpdateDeviceDTO } from "./dto/UpdateDeviceDTO.ts";
 
 const createDevice = async (req: Request, res: Response) => {
   const createDeviceDTO = new CreateDeviceDTO()
