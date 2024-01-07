@@ -15,8 +15,8 @@ class DeviceService {
   async findById(id:number){
     return deviceRepository.findById(id)
   }
-  async findByName(name:string){
-    return deviceRepository.findByName(name)
+  async findByBrand(name:string){
+    return deviceRepository.findByBrand(name)
   }
   async remove(id:number){
     return deviceRepository.remove(id)

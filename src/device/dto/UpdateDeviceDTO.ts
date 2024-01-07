@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, Length } from "class-validator"
+import { IsInt, IsNotEmpty, IsOptional, Length } from "class-validator"
 
 export class UpdateDeviceDTO {
   @Length(3, 20)
@@ -8,4 +8,8 @@ export class UpdateDeviceDTO {
   @Length(3, 20)
   @IsOptional()
   brand: string
+
+  @IsInt()
+  @IsNotEmpty()
+  id:number;
 }
