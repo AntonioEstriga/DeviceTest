@@ -10,8 +10,8 @@ class DeviceRepository {
     return result;
   }
 
-  async findByBrand(name: string): Promise<IDevice[]> {
-    const [result, _] = await db.execute<IDevice[]>("SELECT * FROM device WHERE brand = ?",name);
+  async findByBrand(brand: string): Promise<IDevice[]> {
+    const [result, _] = await db.execute<IDevice[]>("SELECT * FROM device WHERE brand = ?", [brand]);
     return result;
   }
 
@@ -23,19 +23,19 @@ class DeviceRepository {
     return result?.[0]
   }
 
-  async create(device: CreateDeviceDTO): Promise<ResultSetHeader> {
+  async create(device: CreateDeviceDTO): Promise<number> {
     const [result, _] = await db.query<ResultSetHeader>(
       "INSERT INTO device (name, brand) VALUES(?,?)",
       [device.name, device.brand],)
-    return result;
+    return result.insertId;
   }
 
-  async update(device: UpdateDeviceDTO): Promise<ResultSetHeader> {
+  async update(device: UpdateDeviceDTO): Promise<number> {
     const [result, _] = await db.query<ResultSetHeader>(
       "UPDATE device SET name = ?, brand = ? WHERE id = ?"
       [device.name, device.brand, device.id],
     )
-    return result;
+    return result.insertId;
 
   }
 
