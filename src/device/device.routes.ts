@@ -5,12 +5,12 @@ export const router = express.Router()
 
 router.post('/create',createDevice)
 
-router.get('/:deviceId',getDeviceById)
+router.get('/id/:id',getDeviceById)
 
-router.get('/brand/:deviceBrand',getDeviceByBrand)
+router.get('/brand/:brand',getDeviceByBrand)
 
 router.get('/all',getAllDevices)
 
-router.patch('/:deviceId',updateDevice)
+router.patch('/:id',updateDevice)
 
-router.delete('/:deviceId',deleteDevice)
+router.delete('/:id',deleteDevice)

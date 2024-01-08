@@ -1,4 +1,4 @@
-import { validate, validateOrReject } from "class-validator";
+import { validate } from "class-validator";
 import { CreateDeviceDTO } from "./dto/CreateDeviceDTO.ts";
 import { deviceService } from "./device.service.ts"
 import { Request, Response } from 'express'
@@ -13,14 +13,14 @@ const createDevice = async (req: Request, res: Response) => {
   if (errors.length > 0 ){
     res.send(errors)
   }else{
-    const device = deviceService.create(createDeviceDTO)
-    res.status(201).send(device)
+    const deviceId = await deviceService.create(createDeviceDTO)
+    res.status(201).send({ deviceId })
   }
 }
 
-const getDeviceById = (req: Request, res: Response) => {
+const getDeviceById = async (req: Request, res: Response) => {
   const id = req.params.id
-  const device = deviceService.findById(+id)
+  const device = await deviceService.findById(+id)
   res.send(device)
   }
 
@@ -44,13 +44,13 @@ const updateDevice = async (req: Request, res: Response) => {
   if (errors.length > 0) {
     res.send(errors)
   } else {
-    const device = deviceService.update(updateDeviceDTO)
-    res.status(201).send(device)
+    const deviceId = await deviceService.update(updateDeviceDTO)
+    res.send({ deviceId })
   }
 }
 
-const getAllDevices = (req: Request, res: Response) => {
-  const devices = deviceService.findAll()
+const getAllDevices = async (req: Request, res: Response) => {
+  const devices = await deviceService.findAll()
   res.send(devices)
 }
 
@@ -64,12 +64,13 @@ const deleteDevice = async (req: Request, res: Response) => {
   if (!device)
     res.send("Invalid id")
 
-  return deviceService.remove(+id);
+  await deviceService.remove(+id);
+  res.send(device)
 }
 
-const getDeviceByBrand = (req: Request, res: Response) => {
+const getDeviceByBrand = async (req: Request, res: Response) => {
   const brand = req.params.brand
-  const device = deviceService.findByBrand(brand)
+  const device = await deviceService.findByBrand(brand)
   res.send(device)
 }
 
