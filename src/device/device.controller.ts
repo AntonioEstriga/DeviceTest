@@ -4,6 +4,7 @@ import { deviceService } from "./device.service.ts"
 import { Request, Response } from 'express'
 import { UpdateDeviceDTO } from "./dto/UpdateDeviceDTO.ts";
 import { IDevice } from "./entity/IDevice.ts";
+import { INVALID_ID, MISSING_ID } from "./constants.ts";
 
 const createDevice = async (req: Request, res: Response) => {
   const createDeviceDTO = new CreateDeviceDTO()
@@ -49,9 +50,9 @@ const updateDevice = async (req: Request, res: Response) => {
 async function verifyId(id:number,device:IDevice|undefined){
   let error;
   if (!id)
-    error = "Missing id"
+    error = MISSING_ID
   if (!device)
-    error = "Invalid id"
+    error = INVALID_ID
   return error;
 
 }
