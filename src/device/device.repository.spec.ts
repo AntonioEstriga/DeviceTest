@@ -20,7 +20,7 @@ describe('Device repository', () => {
     expect(device?.name).toEqual(createDeviceDTO.name)
   });
   it('should create', async () => {
-    const createDeviceDTO = { name: "Test", brand: "marca" }
+    const createDeviceDTO = { name: "Test", brand}
     const id = await deviceRepository.create(createDeviceDTO)
     const device = await deviceRepository.findById(id)
     deviceList.push(device)
@@ -36,7 +36,8 @@ describe('Device repository', () => {
     expect(deviceByBrand.length).toEqual(deviceList.length)
   });
   it('should update name', async () => {
-    const updateDeviceDTO = { name: "Test234", brand, id: deviceList[0]?.id }
+    const updateDeviceDTO = { name: "Testbdrgdgdrg", brand, id: deviceList[0]?.id }
+    console.log(updateDeviceDTO)
      await deviceRepository.update(updateDeviceDTO)
     const updatedDevice = await deviceRepository.findById(updateDeviceDTO.id)
     expect(updatedDevice?.name).toEqual(updateDeviceDTO.name)

@@ -31,9 +31,10 @@ class DeviceRepository {
   }
 
   async update(device: UpdateDeviceDTO): Promise<number> {
+    console.log(device)
     const [result, _] = await db.query<ResultSetHeader>(
-      "UPDATE device SET name = ?, brand = ? WHERE id = ?"
-      [device.name, device.brand, device.id],
+      "UPDATE device SET name = ?, brand = ? WHERE id = ?",
+      [device.name, device.brand, device.id]
     )
     return result.insertId;
 
