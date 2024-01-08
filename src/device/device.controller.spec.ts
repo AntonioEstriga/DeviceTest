@@ -1,4 +1,4 @@
-import { createDevice, updateDevice } from "./device.controller";
+import { deviceController} from "./device.controller";
 import { getMockReq, getMockRes } from '@jest-mock/express'
 import { deviceService } from "./device.service";
 import { IDevice } from "./entity/IDevice";
@@ -14,7 +14,7 @@ describe('Device controller', () => {
     const deviceBody = { name: 'dispositivo', brand: "teste" }
     const req = getMockReq({ body: { ...deviceBody } })
     const { res } = getMockRes()
-    await createDevice(req, res)
+    await deviceController.createDevice(req, res)
     expect(res.status).toHaveBeenCalledWith(
       201);
   })
@@ -22,7 +22,7 @@ describe('Device controller', () => {
     const deviceBody = { name: 'dispositivo', brand: "teste11111111111111111111111111111111111111111" }
     const req = getMockReq({ body: { ...deviceBody } })
     const { res } = getMockRes()
-    await createDevice(req, res)
+    await deviceController.createDevice(req, res)
     expect(res.send).toHaveBeenCalledWith(
       [{
         "children": [],
@@ -39,7 +39,7 @@ describe('Device controller', () => {
     const deviceBody = { brand: "teste11",id:2 }
     const req = getMockReq({ body: { ...deviceBody } })
     const { res } = getMockRes()
-    await updateDevice(req, res)
+    await deviceController.updateDevice(req, res)
     expect(res.send).toHaveBeenCalledWith(
       { "deviceId": 2 });
   })
