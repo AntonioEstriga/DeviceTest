@@ -3,6 +3,7 @@ import { CreateDeviceDTO } from "./dto/CreateDeviceDTO.ts";
 import { deviceService } from "./device.service.ts"
 import { Request, Response } from 'express'
 import { UpdateDeviceDTO } from "./dto/UpdateDeviceDTO.ts";
+import { IDevice } from "./entity/IDevice.ts";
 
 const createDevice = async (req: Request, res: Response) => {
   const createDeviceDTO = new CreateDeviceDTO()
@@ -26,14 +27,11 @@ const getDeviceById = async (req: Request, res: Response) => {
 
 const updateDevice = async (req: Request, res: Response) => {
   const id = req.body.id;
-
-  if(!id)
-    res.send("Missing id")
-
   const device = await deviceService.findById(id);
-
-  if(!device)
-    res.send("Invalid id")
+  console.log(device)
+  const error = await verifyId(id, device);
+  if(error)
+    res.send(error)
 
   const updateDeviceDTO = new UpdateDeviceDTO()
   updateDeviceDTO.brand = req.body.brand || device?.brand
@@ -48,6 +46,15 @@ const updateDevice = async (req: Request, res: Response) => {
     res.send({ deviceId })
   }
 }
+async function verifyId(id:number,device:IDevice|undefined){
+  let error;
+  if (!id)
+    error = "Missing id"
+  if (!device)
+    error = "Invalid id"
+  return error;
+
+}
 
 const getAllDevices = async (req: Request, res: Response) => {
   const devices = await deviceService.findAll()
@@ -55,14 +62,11 @@ const getAllDevices = async (req: Request, res: Response) => {
 }
 
 const deleteDevice = async (req: Request, res: Response) => {
-  const id = req.params.id;
-
-  if (!id)
-    res.send("Missing id")
-
-  const device = await deviceService.findById(+id);
-  if (!device)
-    res.send("Invalid id")
+  const id = +req.params.id;
+  const device = await deviceService.findById(id);
+  const error = await verifyId(id, device);
+  if (error)
+    res.send(error)
 
   await deviceService.remove(+id);
   res.send(device)
