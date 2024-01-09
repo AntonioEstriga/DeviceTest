@@ -1,11 +1,11 @@
-import { IsNotEmpty, Length } from "class-validator"
+import { IsNotEmpty, Length } from 'class-validator'
 
-export class CreateDeviceDTO{
-  @Length(3,20)
+export class CreateDeviceDTO {
+  @Length(3, 20)
   @IsNotEmpty()
-  name:string
+    name: string
 
   @Length(3, 20)
   @IsNotEmpty()
-  brand:string
+    brand: string
 }
