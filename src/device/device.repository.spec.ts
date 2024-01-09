@@ -1,11 +1,11 @@
+import { deviceRepository } from './device.repository';
 import { db } from '../db';
 import { testDB } from '../testDb';
-import { deviceRepository } from './device.repository';
 describe('Device repository', () => {
 
-  beforeEach(async () => {
+  beforeEach(() => {
     //writing to test DB
-    jest.spyOn(db, "query").mockImplementation( testDB.query);
+    jest.spyOn(db, "query").mockImplementation(testDB.query);
     jest.spyOn(db, "execute").mockImplementation(testDB.execute);
   })
   let deviceList:any[] = []
@@ -37,7 +37,6 @@ describe('Device repository', () => {
   });
   it('should update name', async () => {
     const updateDeviceDTO = { name: "Testbdrgdgdrg", brand, id: deviceList[0]?.id }
-    console.log(updateDeviceDTO)
      await deviceRepository.update(updateDeviceDTO)
     const updatedDevice = await deviceRepository.findById(updateDeviceDTO.id)
     expect(updatedDevice?.name).toEqual(updateDeviceDTO.name)

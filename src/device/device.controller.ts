@@ -32,7 +32,6 @@ class DeviceController {
   async updateDevice(req: Request, res: Response) {
     const id = req.body.id;
     const device = await deviceService.findById(id);
-    console.log(device)
     const error = await this.verifyId(id, device);
     if (error)
       res.send(error)

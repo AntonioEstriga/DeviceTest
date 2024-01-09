@@ -1,16 +1,16 @@
 import express from "express";
-import { createDevice, deleteDevice, getAllDevices, getDeviceByBrand, getDeviceById, updateDevice } from "./device.controller.ts";
+import { deviceController } from "./device.controller.ts";
 
 export const router = express.Router()
 
-router.post('/create',createDevice)
+router.post('/create', deviceController.createDevice)
 
-router.get('/id/:id',getDeviceById)
+router.get('/id/:id', deviceController.getDeviceById)
 
-router.get('/brand/:brand',getDeviceByBrand)
+router.get('/brand/:brand', deviceController.getDeviceByBrand)
 
-router.get('/all',getAllDevices)
+router.get('/all', deviceController.getAllDevices)
 
-router.patch('/:id',updateDevice)
+router.patch('/:id', deviceController.updateDevice)
 
-router.delete('/:id',deleteDevice)
+router.delete('/:id', deviceController.deleteDevice)
